@@ -15,6 +15,12 @@ function isValidPassword(password) {
   return regex.test(password);
 }
 
+// Restrict phone no.inputs to be digit only when typing
+$("#phone").on("input", function () {
+  this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+
 // Run this when the form is submitted
 $("#registrationForm").submit(function (event) {
   event.preventDefault(); // Stop the form from refreshing the page
@@ -70,9 +76,12 @@ $("#registrationForm").submit(function (event) {
 // When the checkbox is clicked, show or hide the password
 $("#togglePassword").change(function () {
   var passwordInput = $("#password");
+  var confirmInput = $("#confirmPassword")
   if ($(this).is(":checked")) {
     passwordInput.attr("type", "text");
+    confirmInput.attr("type", "text");
   } else {
     passwordInput.attr("type", "password");
+    confirmInput.attr("type", "password");
   }
 });
