@@ -31,6 +31,7 @@ $("#registrationForm").submit(function (event) {
   var email = $("#email").val().trim();
   var phone = $("#phone").val().trim();
   var password = $("#password").val();
+  var confirmPassword = $("#confirmPassword").val().trim();
 
   // Clear old messages
   $("#messageBox").removeClass("error success").hide();
@@ -56,6 +57,12 @@ $("#registrationForm").submit(function (event) {
     errorMessage += "<p>Password is required.</p>";
   } else if (!isValidPassword(password)) {
     errorMessage += "<p>Password must have uppercase, lowercase, number and be at least 6 characters.</p>";
+  }
+  
+  if (confirmPassword === "") {
+    errorMessage += "<p>Confirm Password is required.</p>";
+  } else if (password !== confirmPassword) {
+    errorMessage += "<p>Passwords do not match.</p>";
   }
 
   // If there are no errors, show success
